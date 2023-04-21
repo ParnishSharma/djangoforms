@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact Form</title>
+        <style>
+            body{
+                background-color:lavender;
+
+            }
+            form {
+                margin: 0 auto;
+                width: 50%;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            input[type="text"], input[type="email"], textarea {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            textarea {
+                height: 150remm;
+            }
+
+            button[type="submit"] {
+                display: block;
+                margin: 0 auto;
+                padding: 10px 20px;
+                border-radius: 5px;
+                background-color: #4CAF50;
+                color: white;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{ form.name.id_for_label }}">Name:</label>
+            {{ form.name }}
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }}
+            <label for="{{ form.message.id_for_label }}">Message:</label>
+            {{ form.message }}
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
