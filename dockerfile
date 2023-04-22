@@ -7,19 +7,25 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
+# Update and install any needed packages
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Upgrade pip and install dependencies
+RUN python -m pip install --upgrade pip
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
 
 # Define environment variable
-ENV NAME my-django-app
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV DJANGO_SETTINGS_MODULE=basicforms.settings.production
 
-# Run app.py when the container launches
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Run the server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--noreload", "--settings=basicforms.settings.production"]
