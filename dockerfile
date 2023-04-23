@@ -1,31 +1,22 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8-slim-buster
+FROM python:3.9-slim-buster
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy the requirements file into the container and install the dependencies
+COPY requirements.txt /app/
+RUN /usr/local/bin/python -m pip install --upgrade pip
 
-# Update and install any needed packages
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        build-essential \
-        libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+# Copy the rest of the application code into the container
+COPY . /app/
 
-# Upgrade pip and install dependencies
-RUN python -m pip install --upgrade pip
-RUN python -m pip install django
+# Set the environment variables for Django
+ENV DJANGO_SETTINGS_MODULE=myproject.settings
+ENV PYTHONUNBUFFERED=1
 
-
-# Make port 8000 available to the world outside this container
+# Expose port 8000 for the Django development server
 EXPOSE 8000
 
-# Define environment variable
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV DJANGO_SETTINGS_MODULE=mysite.settings
-
-# Run the server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--noreload"]
+# Start the Django development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
