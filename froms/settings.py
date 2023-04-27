@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-418t^cy_z#w7bmb9s&s#2fl5xmo1ysq7-=33kl1z&xkk)b6q@$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tryforms.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://tryforms.onrender.com']
 
 
 # Application definition
