@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-418t^cy_z#w7bmb9s&s#2fl5xmo1ysq7-=33kl1z&xkk)b6q@$
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com', 'tryforms.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['localhost', '127.0.0.1', '.onrender.com', 'tryforms.onrender.com']
 
 
 CORS_ALLOWED_ORIGINS = [    "https://tryforms.onrender.com",    "https://www.tryforms.onrender.com",    "http://localhost:8000",]
