@@ -13,7 +13,7 @@ RUN pip install django
 COPY . /app/
 
 # Set the environment variables for Django
-ENV DJANGO_SETTINGS_MODULE=myproject.settings
+ENV DJANGO_SETTINGS_MODULE=froms.settings
 ENV PYTHONUNBUFFERED=1
 
 # Expose port 8000 for the Django development server
