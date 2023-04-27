@@ -1,12 +1,13 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim-buster
+FROM python:3.9
 
 # Set the working directory to /app
 WORKDIR /app
 
 # Copy the requirements file into the container and install the dependencies
-COPY requirements.txt /app/
-RUN /usr/local/bin/python -m pip install --upgrade pip
+COPY requirements.txt .
+RUN /usr/local/bin/python -m pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install django
 
 # Copy the rest of the application code into the container
 COPY . /app/
